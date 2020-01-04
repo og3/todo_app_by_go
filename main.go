@@ -18,6 +18,13 @@ func main() {
   // DBの初期化
   dbInit()
 
+  // サンプル呼び出し
+  router.GET("/ping", func(ctx *gin.Context) {
+    ctx.JSON(200, gin.H{
+      "message": "pong",
+    })
+  })
+
   //Index
   router.GET("/", func(ctx *gin.Context) {
     // 関数の呼び出し
