@@ -6,8 +6,7 @@ import (
     "github.com/gin-gonic/gin"
     // gormのインポート
     "github.com/jinzhu/gorm"
-    // sqlite3を「使わない」宣言
-    _ "github.com/mattn/go-sqlite3"
+    _"github.com/go-sql-driver/mysql"
 )
 
 // 機能
@@ -97,7 +96,7 @@ type Todo struct {
 //DBマイグレート
 func dbInit() {
     // gorm.Open("使用するDBデバイス名", "ファイル名")
-    db, err := gorm.Open("sqlite3", "test.sqlite3")
+    db, err := gorm.Open("mysql", "root:@tcp(127.0.0.1:3306)/todo_app_by_go?parseTime=true")
     if err != nil {
         panic("データベース開けず！（dbInit）")
     }
@@ -109,7 +108,7 @@ func dbInit() {
 
 //DB追加
 func dbInsert(text string, status string) {
-    db, err := gorm.Open("sqlite3", "test.sqlite3")
+    db, err := gorm.Open("mysql", "root:@tcp(127.0.0.1:3306)/todo_app_by_go?parseTime=true")
     if err != nil {
         panic("データベース開けず！（dbInsert)")
     }
@@ -120,7 +119,7 @@ func dbInsert(text string, status string) {
 
 //DB全取得
 func dbGetAll() []Todo {
-    db, err := gorm.Open("sqlite3", "test.sqlite3")
+    db, err := gorm.Open("mysql", "root:@tcp(127.0.0.1:3306)/todo_app_by_go?parseTime=true")
     if err != nil {
         panic("データベース開けず！(dbGetAll())")
     }
@@ -132,7 +131,7 @@ func dbGetAll() []Todo {
 
 //DB一つ取得
 func dbGetOne(id int) Todo {
-    db, err := gorm.Open("sqlite3", "test.sqlite3")
+    db, err := gorm.Open("mysql", "root:@tcp(127.0.0.1:3306)/todo_app_by_go?parseTime=true")
     if err != nil {
         panic("データベース開けず！(dbGetOne())")
     }
@@ -144,7 +143,7 @@ func dbGetOne(id int) Todo {
 
 //DB更新
 func dbUpdate(id int, text string, status string) {
-    db, err := gorm.Open("sqlite3", "test.sqlite3")
+    db, err := gorm.Open("mysql", "root:@tcp(127.0.0.1:3306)/todo_app_by_go?parseTime=true")
     if err != nil {
         panic("データベース開けず！（dbUpdate)")
     }
@@ -158,7 +157,7 @@ func dbUpdate(id int, text string, status string) {
 
 //DB削除
 func dbDelete(id int) {
-    db, err := gorm.Open("sqlite3", "test.sqlite3")
+    db, err := gorm.Open("mysql", "root:@tcp(127.0.0.1:3306)/todo_app_by_go?parseTime=true")
     if err != nil {
         panic("データベース開けず！（dbDelete)")
     }
@@ -169,4 +168,3 @@ func dbDelete(id int) {
     db.Delete(&todo)
     db.Close()
 }
-
